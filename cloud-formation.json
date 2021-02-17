@@ -1,0 +1,37 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "lambda": {
+            "Type" : "AWS::Lambda::Function",
+            "Properties" : {
+                "Code" : "",
+                "Description" : "AWS Lambda to handle mailgun webhooks",
+                "FunctionName" : "handle-webhooks-cloudformation",
+                "PackageType" : "Image",
+                "Role" : "arn:aws:iam::876208092783:role/service-role/master"
+        },
+        "sns": {
+            "Type" : "AWS::SNS::Topic",
+            "Properties" : {
+                "ContentBasedDeduplication" : false,
+                "Role" : "arn:aws:iam::876208092783:role/service-role/master",
+                "DisplayName" : "Receeve Display name",
+                "FifoTopic" : false,
+                "Tags" : [ {
+                    "Key": "use case", "Value": "testing"
+                }]
+              }
+          }
+          ,
+        "s3": {
+            "Type" : "AWS::S3::Bucket",
+            "Properties" : {
+                "Role" : "arn:aws:iam::876208092783:role/service-role/master",
+                "BucketName" : "Receeve S3 Bucket"
+              }
+          }
+          
+        }
+    }
+}
+  
